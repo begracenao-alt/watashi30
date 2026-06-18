@@ -1,0 +1,1915 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#FFF5F4" />
+    <title>Be Grace ─ 今日の私診断</title>
+    <meta
+      name="description"
+      content="今日一日を最高の未来に繋げる。Be Grace の無料の玄関、今日の私診断。"
+    />
+
+    <!-- 共有時（LINE / Instagram など）のプレビュー表示 -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="今日の私診断 ─ Be Grace" />
+    <meta
+      property="og:description"
+      content="今日一日を、最高の未来に繋げる。1分でできる、今日のあなたの状態診断。"
+    />
+    <meta property="og:locale" content="ja_JP" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- ▼公開後、画像URL（絶対パス）を入れると、共有時に画像が出ます
+         <meta property="og:image" content="https://あなたのURL/ogp.png" /> -->
+
+    <!-- タブ・ブックマークのアイコン（ゴールドのリング） -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Ccircle%20cx='16'%20cy='16'%20r='9'%20fill='none'%20stroke='%23bd9c5e'%20stroke-width='2'/%3E%3C/svg%3E"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+/* ============================================================
+   Be Grace ─ 今日の私診断
+   リュクス・女性向け・余白を大切にしたトーン
+   ============================================================ */
+
+:root {
+  --cream: #fdf8f7;
+  --cream-deep: #fbf3f1;
+  --ivory: #ffffff;
+  --ink: #4a3d42;
+  --ink-soft: #7a6a70;
+  --gold: #c9a85f;
+  --gold-deep: #b88a32;
+  --gold-light: #f4e3b6;
+  --rose: #e6a6b4;
+  --rose-soft: #f6d2da;
+  --rosegold: #e3b79e;
+  --line: #f0dcd4;
+  --radius: 26px;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --shadow: 0 30px 60px -24px rgba(205, 165, 170, 0.30);
+  --shadow-card: 0 26px 54px -24px rgba(205, 165, 170, 0.32), 0 4px 14px -8px rgba(205, 165, 170, 0.18);
+  --shadow-soft: 0 16px 38px -22px rgba(205, 165, 170, 0.26);
+  --shadow-btn: 0 16px 30px -10px rgba(220, 160, 170, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(150% 65% at 50% -14%, #ffffff 0%, var(--cream) 52%, var(--cream-deep) 100%) fixed;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.85;
+  letter-spacing: 0.02em;
+  font-weight: 300;
+}
+
+/* ごく薄い紙の質感（リュクスなマット感） */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='100'%20height='100'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.85'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+}
+
+.stage {
+  max-width: 468px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  padding: 0 24px env(safe-area-inset-bottom);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- 画面の切り替え ---------- */
+.screen {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  animation: fade 0.7s var(--ease);
+}
+.screen.is-active {
+  display: flex;
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- 共通パーツ ---------- */
+.eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  font-size: 13px;
+  color: var(--gold-deep);
+  text-indent: 0.42em;
+}
+
+.btn {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  border: none;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 17px 34px;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none; /* <a>のボタンでも下線を出さず、余白を正しく効かせる */
+  transition:
+    transform 0.4s var(--ease),
+    box-shadow 0.4s var(--ease),
+    opacity 0.3s;
+}
+.btn--primary {
+  background: linear-gradient(135deg, #e6a6b4 0%, #e3b79e 52%, #c9a85f 100%);
+  color: #fffdf8;
+  box-shadow: var(--shadow-btn), inset 0 1px 0 rgba(255, 255, 255, 0.38);
+  text-shadow: 0 1px 1px rgba(120, 90, 40, 0.16);
+}
+.btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 22px 36px -10px rgba(168, 134, 63, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.42);
+}
+.btn--primary:active {
+  transform: translateY(0);
+}
+.btn--primary:disabled {
+  opacity: 0.35;
+  cursor: default;
+  box-shadow: none;
+  transform: none;
+}
+.btn--ghost {
+  background: transparent;
+  color: var(--gold-deep);
+  border: 1px solid var(--line);
+}
+/* やわらかいお誘い用（売り込み感を出さない） */
+.btn--soft {
+  background: linear-gradient(180deg, #fffefb, #f6ecda);
+  color: var(--gold-deep);
+  border: 1px solid var(--gold);
+  box-shadow: 0 8px 20px -12px rgba(168, 134, 63, 0.32);
+}
+.btn--soft:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(180deg, #fffefb, #f1e4cb);
+  box-shadow: 0 14px 26px -12px rgba(168, 134, 63, 0.4);
+}
+
+/* ============================================================
+   玄関（ウェルカム）
+   ============================================================ */
+.screen--welcome {
+  justify-content: center;
+  text-align: center;
+}
+.welcome-inner {
+  padding: 40px 6px 70px;
+  position: relative;
+}
+/* 玄関の、やわらかな光 */
+.welcome-inner::before {
+  content: '';
+  position: absolute;
+  top: 4%;
+  left: 50%;
+  width: 340px;
+  height: 340px;
+  max-width: 92vw;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(226, 207, 159, 0.4), transparent 66%);
+  z-index: -1;
+  pointer-events: none;
+}
+.hero-title {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 500;
+  font-size: clamp(27px, 8.2vw, 35px);
+  letter-spacing: 0.08em;
+  margin: 18px 0 14px;
+  line-height: 1.6;
+}
+.hero-sub {
+  display: inline-block;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 400;
+  color: var(--gold-deep);
+  letter-spacing: 0.22em;
+  font-size: 18px;
+  position: relative;
+  padding: 0 26px;
+  margin-top: 4px;
+}
+.hero-sub::before,
+.hero-sub::after {
+  content: '';
+  position: absolute;
+  top: 52%;
+  width: 16px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.75;
+}
+.hero-sub::before {
+  left: 0;
+}
+.hero-sub::after {
+  right: 0;
+}
+.hero-ornament {
+  color: var(--gold);
+  font-size: 22px;
+  margin: 36px 0;
+  letter-spacing: 0.3em;
+}
+.hero-lead {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 2.2;
+  margin-bottom: 46px;
+}
+.hero-note {
+  margin-top: 22px;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: var(--ink-soft);
+}
+
+/* ============================================================
+   クイズ
+   ============================================================ */
+.quiz-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 26px 2px 8px;
+}
+.back {
+  background: none;
+  border: none;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--gold-deep);
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+.back:hover {
+  background: rgba(189, 156, 94, 0.1);
+}
+.quiz-head__spacer {
+  width: 40px;
+}
+.progress {
+  display: flex;
+  gap: 10px;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--line);
+  transition: all 0.5s var(--ease);
+}
+.dot.is-on {
+  background: var(--gold);
+  transform: scale(1.25);
+}
+
+.step {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  padding: 18px 2px 40px;
+  animation: fade 0.6s var(--ease);
+}
+.step.is-active {
+  display: flex;
+}
+.step-no {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+.step-title {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 500;
+  font-size: clamp(16px, 4.8vw, 19px);
+  line-height: 1.6;
+  margin: 8px 0 10px;
+  white-space: nowrap; /* 見出しは1行に収める */
+}
+.step-hint {
+  color: var(--ink-soft);
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+.optional-tag {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--gold-deep);
+  background: rgba(189, 156, 94, 0.12);
+  border-radius: 999px;
+  padding: 3px 12px;
+}
+.step-hint b {
+  color: var(--gold-deep);
+  font-weight: 500;
+}
+
+.field-birth {
+  display: flex;
+  gap: 10px;
+}
+.field-select {
+  flex: 1;
+  min-width: 0;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--ink);
+  background-color: var(--ivory);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 17px 28px 17px 12px;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-align-last: center;
+  appearance: none;
+  -webkit-appearance: none;
+  /* 金色の下向き矢印（押せる印） */
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='12'%20height='8'%20viewBox='0%200%2012%208'%3E%3Cpath%20d='M1%201l5%205%205-5'%20fill='none'%20stroke='%23bd9c5e'%20stroke-width='1.6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 11px center;
+}
+.field-select:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(189, 156, 94, 0.12);
+}
+
+/* 生まれた日を選ぶと現れる、その場プレビュー */
+.birth-preview {
+  margin-top: 22px;
+  margin-bottom: auto;
+  text-align: center;
+  padding: 24px 22px 22px;
+  background: linear-gradient(135deg, #faf4e9, #f5ead6);
+  border-radius: 22px;
+  animation: rise 0.6s var(--ease);
+}
+.birth-preview .rhythm-name {
+  font-size: 21px;
+  margin-top: 8px;
+}
+.birth-preview .rhythm-reading {
+  font-size: 14px;
+}
+.birth-preview__caption {
+  margin-top: 16px;
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+}
+
+/* 選択肢 */
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 11px;
+  margin-bottom: auto;
+}
+.choices--gender {
+  flex-direction: column;
+}
+.chip {
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--ink);
+  background: linear-gradient(180deg, #fffdf9, var(--ivory));
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 13px 20px;
+  cursor: pointer;
+  transition: all 0.35s var(--ease);
+  letter-spacing: 0.05em;
+  box-shadow: 0 2px 6px -3px rgba(150, 122, 80, 0.12);
+}
+.chip--lg {
+  padding: 18px 22px;
+  text-align: left;
+  font-size: 16px;
+}
+.chip:hover {
+  border-color: var(--gold);
+  transform: translateY(-1px);
+}
+.chip.is-on {
+  background: linear-gradient(135deg, #e3c477, var(--gold-deep));
+  color: #fffdf8;
+  border-color: transparent;
+  box-shadow:
+    0 10px 20px -6px rgba(168, 134, 63, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.32);
+}
+/* tone でほのかに色味を分ける */
+.chip[data-tone='shine'].is-on {
+  background: linear-gradient(135deg, #e3c477, #c9a85f);
+}
+.chip.is-disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.select-count {
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  color: var(--gold-deep);
+  letter-spacing: 0.1em;
+  margin: 24px 0 18px;
+}
+
+.step .btn {
+  margin-top: 26px;
+  width: 100%;
+}
+
+/* ============================================================
+   診断中
+   ============================================================ */
+.screen--loading {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.loader {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.loader span {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: breathe 1.4s var(--ease) infinite;
+}
+.loader span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.loader span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(0.6);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.loading-text {
+  font-family: 'Noto Serif JP', serif;
+  color: var(--ink-soft);
+  letter-spacing: 0.14em;
+}
+
+/* ============================================================
+   結果
+   ============================================================ */
+.screen--result {
+  padding-bottom: 50px;
+}
+.result-inner {
+  padding-top: 34px;
+}
+.result-eyebrow {
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: 0.4em;
+  font-size: 12px;
+  color: var(--gold-deep);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.result-personal {
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-bottom: 22px;
+  letter-spacing: 0.06em;
+}
+
+/* 結果ヘッダーカード */
+.result-card {
+  background: linear-gradient(170deg, #fffdf9, var(--ivory));
+  border-radius: var(--radius);
+  padding: 46px 30px 40px;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  position: relative;
+  overflow: hidden;
+}
+.result-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--type-accent, var(--gold)) 22%,
+    var(--type-accent, var(--gold)) 78%,
+    transparent
+  );
+}
+.result-symbol {
+  font-size: 40px;
+  color: var(--type-accent, var(--gold));
+  line-height: 1;
+}
+.result-type {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 600;
+  font-size: clamp(21px, 6.4vw, 29px);
+  letter-spacing: 0.03em;
+  margin: 16px 0 12px;
+  white-space: nowrap; /* 「エネルギー充電タイプ」等の長い名前も1行に収める */
+}
+.result-tagline {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+/* 今日のあなたのリズム（生年月日 × 今日の日付） */
+.result-rhythm {
+  margin-top: 22px;
+  text-align: center;
+  padding: 24px 22px 26px;
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: rise 0.7s var(--ease) forwards;
+}
+.rhythm-label {
+  display: inline-block;
+  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: 0.18em;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: 14px;
+}
+.rhythm-name {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: 0.1em;
+  color: var(--gold-deep);
+  position: relative;
+  display: inline-block;
+  padding: 0 24px;
+}
+.rhythm-name::before,
+.rhythm-name::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 16px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.6;
+}
+.rhythm-name::before {
+  left: -6px;
+}
+.rhythm-name::after {
+  right: -6px;
+}
+.rhythm-reading {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: 14.5px;
+  line-height: 2.05;
+  color: var(--ink);
+  margin-top: 14px;
+  text-align: left;
+}
+
+/* 結果のセクション群 */
+.result-block {
+  margin-top: 26px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 26px 26px 28px;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: rise 0.7s var(--ease) forwards;
+}
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.block-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: 0.16em;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: 14px;
+}
+.block-label::before {
+  content: '';
+  width: 18px;
+  height: 1px;
+  background: var(--gold);
+}
+.block-jp {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 500;
+  font-size: 17px;
+  margin-bottom: 10px;
+  letter-spacing: 0.04em;
+}
+.block-body {
+  font-size: 15px;
+  line-height: 2.1;
+  color: var(--ink);
+}
+
+/* 今日の状態ブロックは、他の結果と同じく中央ぞろえに */
+.result-block--today {
+  text-align: center;
+}
+.result-block--today .block-label {
+  justify-content: center;
+}
+/* 読み応えのある本文（お見受け文・アドバイス）は、読みやすく左ぞろえに */
+.result-block--today .block-body {
+  text-align: left;
+}
+
+/* 今日の判定（進みやすい日 / 整えながら進む日） */
+.verdict {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 500;
+  font-size: clamp(19px, 5.4vw, 22px);
+  color: var(--gold-deep);
+  text-align: center;
+  letter-spacing: 0.04em;
+  line-height: 1.7;
+  margin-bottom: 18px;
+}
+
+/* アファメーション（特別なトーン） */
+.result-block--affirm {
+  background: #ffffff;
+  border-color: var(--line);
+  text-align: center;
+}
+/* アファメーション3つ：1行ずつ、やさしい区切り線で */
+.result-block--affirm .block-jp {
+  margin-bottom: 16px;
+}
+.affirm-line {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: clamp(15px, 4.2vw, 17px);
+  line-height: 2;
+  padding: 12px 4px;
+}
+.affirm-line + .affirm-line {
+  border-top: 1px solid rgba(189, 156, 94, 0.2);
+}
+
+.affirm-quote {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: clamp(15px, 4.4vw, 17px);
+  line-height: 2.1;
+  position: relative;
+  padding: 8px 6px;
+}
+.affirm-quote::before,
+.affirm-quote::after {
+  content: '“';
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--gold);
+  font-size: 34px;
+  line-height: 0;
+  vertical-align: -0.35em;
+  margin: 0 4px;
+}
+.affirm-quote::after {
+  content: '”';
+}
+
+/* 最後のやさしい一言 */
+.result-closing {
+  text-align: center;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 2.2;
+  color: var(--ink);
+  margin: 40px 14px 8px;
+}
+.closing-mark {
+  color: var(--gold);
+  font-size: 18px;
+  margin-bottom: 14px;
+}
+
+/* Be Grace Message（オーナーからの、毎回ランダムなひとこと） */
+.result-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.message-label {
+  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: 0.3em;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  text-indent: 0.3em;
+  margin-bottom: 16px;
+}
+.message-body {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: clamp(16px, 4.6vw, 18px);
+  line-height: 2.2;
+}
+
+/* 鍵の奥への、ひそやかな誘い（売り込まない） */
+.result-door {
+  margin-top: 44px;
+  text-align: center;
+  padding: 30px 24px;
+  border-top: 1px solid var(--line);
+}
+.door-line {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 2.1;
+  letter-spacing: 0.06em;
+}
+.door-cta {
+  width: 100%;
+  margin-top: 24px;
+}
+.door-sub {
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+}
+.door-invite {
+  margin-top: 18px;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 2;
+  color: var(--ink);
+  letter-spacing: 0.05em;
+}
+.door-key {
+  font-size: 20px;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 12px;
+}
+.door-mark {
+  font-size: 18px;
+  color: var(--gold);
+  margin-bottom: 14px;
+  letter-spacing: 0.2em;
+}
+
+.result-actions {
+  margin-top: 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.result-actions .btn {
+  width: 100%;
+}
+
+/* やさしい免責 */
+.disclaimer {
+  margin-top: 26px;
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.9;
+  color: var(--ink-soft);
+  opacity: 0.85;
+  letter-spacing: 0.04em;
+}
+
+/* 「う」だけ・「夫」だけ…と最後の1文字が次の行に落ちる"ぼっち改行"を防ぐ。
+   句読点（、。）の所だけで改行し、語の途中では折り返さない（JSが、。の後ろに改行候補を入れる）。
+   長すぎて1行に入らないときだけ、やむを得ず途中で折り返す（overflow-wrap）。 */
+/* 短い・中央ぞろえの言葉：句読点や中央で"半分ずつ"気持ちよく折り返す（phrの<wbr>＋keep-all） */
+.result-tagline,
+.affirm-quote,
+.affirm-line,
+.message-body,
+.door-line,
+.door-invite {
+  word-break: keep-all;
+}
+/* 読み応えのある本文・見出し・説明文：日本語の自然な改行（禁則処理）に任せる。「。」「、」は行頭に来ない */
+.block-body,
+.rhythm-reading,
+.step-title,
+.step-hint,
+.hero-lead {
+  line-break: strict;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+/* 見出しは行の長さをそろえる */
+.hero-title,
+.hero-lead,
+.step-title {
+  text-wrap: balance;
+}
+
+@media (max-width: 360px) {
+  .stage {
+    padding: 0 16px;
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main class="stage" id="stage">
+      <!-- ▼ 玄関（ウェルカム） -->
+      <section class="screen screen--welcome is-active" data-screen="welcome">
+        <div class="welcome-inner">
+          <p class="eyebrow">Be Grace</p>
+          <h1 class="hero-title">今日一日を、<br />最高の未来に繋げる</h1>
+          <p class="hero-sub">今日の私診断</p>
+          <div class="hero-ornament" aria-hidden="true">⟡</div>
+          <p class="hero-lead">
+            ちゃんとしなくて大丈夫。<br />
+            今日も、余白を作りましょう。
+          </p>
+          <button class="btn btn--primary" data-action="start">診断をはじめる</button>
+          <p class="hero-note">所要 約1分 ・ 無料</p>
+        </div>
+      </section>
+
+      <!-- ▼ 質問ステップ -->
+      <section class="screen screen--quiz" data-screen="quiz">
+        <header class="quiz-head">
+          <button class="back" data-action="back" aria-label="ひとつ前へ">‹</button>
+          <div class="progress" aria-hidden="true">
+            <span class="dot" data-step="0"></span>
+            <span class="dot" data-step="1"></span>
+          </div>
+          <span class="quiz-head__spacer"></span>
+        </header>
+
+        <!-- Step 1: 生年月日 -->
+        <div class="step is-active" data-step="0">
+          <p class="step-no">01</p>
+          <h2 class="step-title">生まれた日を、教えてください<span class="optional-tag">任意</span></h2>
+          <p class="step-hint">
+            生まれた日を選ぶと「生まれ持ったあなたのリズム（あなたの本質）」も届きます。<br />
+            入れずに進んでも、診断はできます。
+          </p>
+          <div class="field-birth">
+            <select class="field-select" id="birthYear" aria-label="生まれた年"></select>
+            <select class="field-select" id="birthMonth" aria-label="生まれた月"></select>
+            <select class="field-select" id="birthDay" aria-label="生まれた日"></select>
+          </div>
+          <div class="birth-preview" id="birthPreview" hidden>
+            <span class="rhythm-label">Your Nature ─ 生まれ持ったあなたのリズム</span>
+            <p class="rhythm-name"></p>
+            <p class="rhythm-reading"></p>
+            <p class="birth-preview__caption">↑ これが、あなたの生まれ持った性質です。</p>
+          </div>
+          <button class="btn btn--primary" data-action="next" data-from="0">つぎへ</button>
+        </div>
+
+        <!-- Step 2: 気持ち・体調 3つ -->
+        <div class="step" data-step="1">
+          <p class="step-no">02</p>
+          <h2 class="step-title">いまの気持ち・体調は？</h2>
+          <p class="step-hint">近いものを <b>3つ</b> 選んでください。</p>
+          <div
+            class="choices choices--feelings"
+            id="feelings"
+            role="group"
+            aria-label="気持ち・体調を3つ選ぶ"
+          ><!-- JSで生成 --></div>
+          <p class="select-count" id="selectCount">0 / 3</p>
+          <button class="btn btn--primary" data-action="next" data-from="1" disabled>
+            診断する
+          </button>
+        </div>
+      </section>
+
+      <!-- ▼ 診断中 -->
+      <section class="screen screen--loading" data-screen="loading">
+        <div class="loader" aria-hidden="true"><span></span><span></span><span></span></div>
+        <p class="loading-text">今日のあなたを、感じています…</p>
+      </section>
+
+      <!-- ▼ 使い切ったとき（1回／14日モード）の案内 -->
+      <section class="screen screen--welcome" data-screen="locked">
+        <div class="welcome-inner">
+          <p class="eyebrow">Be Grace</p>
+          <div class="hero-ornament" aria-hidden="true">⟡</div>
+          <p class="hero-lead" id="lockedLead"></p>
+          <a class="btn btn--primary" id="lockedCta" href="#" target="_blank" rel="noopener"></a>
+        </div>
+      </section>
+
+      <!-- ▼ 結果 -->
+      <section class="screen screen--result" data-screen="result">
+        <div class="result-inner" id="resultInner"><!-- JSで生成 --></div>
+      </section>
+    </main>
+    <script>
+/* ============================================================
+ *  Be Grace ─ リンク設定ファイル
+ * ============================================================
+ *
+ *  ボタンの飛び先は、あなたのサイト（WordPress）の固定ページに向けてあります。
+ *  ↓ この2ページを WordPress で作れば、ボタンが自動でそこに繋がります。
+ *    ・begracenao.com/guide/   … 個別相談・セミナーのご案内（①の飛び先）
+ *    ・begracenao.com/member/  … 会員のご案内（②の飛び先）
+ *
+ *  ★ ここがポイント ★
+ *  この2ページの"中身"は、いつでも WordPress の管理画面で編集できます。
+ *  （個別相談→セミナーに変える、日時を変える 等）。
+ *  だから、アプリ本体（このファイル）は二度と触らなくてOKです。
+ * ============================================================ */
+
+const CONFIG = {
+  // ① 1日モードの後 →「ご案内を見る」の飛び先（個別相談・セミナーのご案内ページ）
+  CONSULT_URL: 'https://begracenao.com/guide/',
+
+  // ② 14日モードの後 →「次のご案内を見る」の飛び先（会員のご案内ページ）
+  MEMBER_URL: 'https://begracenao.com/member/',
+
+  // （予備）LINE公式の友だち追加リンク。今のファネルではアプリ内で未使用
+  LINE_URL: 'https://begracenao.com/guide/',
+};
+
+/*
+ * ▼ アクセス3段階（モード）の使い方
+ *   ・①1日    … 通常のURL                 （無料・LINE登録した人に渡す）
+ *   ・②30日   … URLのうしろに ?plan=30     を付ける（有料ミニ講座用。最後に「30日まとめ」）
+ *   ・③無期限 … URLのうしろに ?plan=member を付ける（あなた＆会員に渡す）
+ *   例）https://begracenao.com/shindan.html?plan=30
+ */
+
+/*
+ * Be Grace ─ 今日の私診断（無料の玄関）
+ * 診断データ定義
+ *
+ * - FEELINGS: 体調・気持ちの選択肢（3つ選ぶ）。各選択肢は診断タイプへの重みを持つ。
+ * - TYPES:    7つの診断タイプと、無料診断で出す5項目のコピー。
+ *
+ * 医療診断ではなく、セルフケアの範囲。責めず・押し付けず・ホッとする言葉で。
+ */
+
+/* 診断タイプ ID */
+const T = {
+  BRAIN: 'brain', // 脳疲労
+  BODY: 'body', // カラダ疲労
+  NERVE: 'nerve', // 神経緊張
+  EMOTION: 'emotion', // 感情整理
+  CHARGE: 'charge', // エネルギー充電
+  RECOVER: 'recover', // 回復完了
+  CHALLENGE: 'challenge', // チャレンジ日和
+};
+
+/*
+ * 今日の状態チェック（20個・朝に直感で3つ選ぶ）
+ * 各選択肢は裏に2つのタグを持つ：
+ *   type : 7タイプ判定タグ
+ *   mood : 'beautiful'（今日は進みやすい日）/ 'suffering'（今日は整えながら進む日）
+ * 表示の色分けは mood から決める（beautiful=きらめき / suffering=やわらか）。
+ */
+const FEELINGS = [
+  /* ── カラダ ── */
+  { id: 'darui', label: 'だるい', type: T.BODY, mood: 'suffering' },
+  { id: 'tsukareta', label: '疲れてる', type: T.BODY, mood: 'suffering' },
+  { id: 'kubikata', label: '首肩重い', type: T.BODY, mood: 'suffering' },
+  { id: 'nemui', label: '眠い', type: T.CHARGE, mood: 'suffering' },
+  { id: 'bonyari', label: 'ぼんやり', type: T.CHARGE, mood: 'suffering' },
+  /* ── 思考 ── */
+  { id: 'atama', label: '頭が重い', type: T.BRAIN, mood: 'suffering' },
+  { id: 'kangaesugi', label: '考えすぎ', type: T.BRAIN, mood: 'suffering' },
+  { id: 'kimerarenai', label: '決められない', type: T.BRAIN, mood: 'suffering' },
+  /* ── 感情 ── */
+  { id: 'fuan', label: '不安', type: T.NERVE, mood: 'suffering' },
+  { id: 'aseri', label: '焦り', type: T.NERVE, mood: 'suffering' },
+  { id: 'kizukai', label: '気を使う', type: T.NERVE, mood: 'suffering' },
+  { id: 'iraira', label: 'イライラ', type: T.EMOTION, mood: 'suffering' },
+  { id: 'moyamoya', label: 'モヤモヤ', type: T.EMOTION, mood: 'suffering' },
+  { id: 'ochikomi', label: '落ち込み', type: T.EMOTION, mood: 'suffering' },
+  /* ── 前向き ── */
+  { id: 'karui', label: '軽い', type: T.RECOVER, mood: 'beautiful' },
+  { id: 'anshin', label: '安心', type: T.RECOVER, mood: 'beautiful' },
+  { id: 'sukkiri', label: 'スッキリ', type: T.RECOVER, mood: 'beautiful' },
+  { id: 'wakuwaku', label: 'ワクワク', type: T.CHALLENGE, mood: 'beautiful' },
+  { id: 'yaruki', label: 'やる気', type: T.CHALLENGE, mood: 'beautiful' },
+  { id: 'maemuki', label: '前向き', type: T.CHALLENGE, mood: 'beautiful' },
+];
+
+/*
+ * 診断タイプ定義
+ * priority: 同点時の優先順（数が小さいほど先に拾う）。判定(mood)に合うタイプの中で
+ *           同数になったときの決め手。「整える」を大切にする順（カラダ疲労→…→チャレンジ）。
+ * 無料診断で出すのは下記5項目のみ：
+ *   result(結果) / reason(かんたんな理由) / future(今日の未来メッセージ)
+ *   affirmation(今日のアファメーション) / closing(最後のやさしい一言)
+ */
+const TYPES = {
+  [T.BRAIN]: {
+    id: T.BRAIN,
+    name: '脳疲労タイプ',
+    symbol: '☁︎',
+    tagline: '頭の中に、すこし霧がかかっている日',
+    accent: '#9AA7B0',
+    priority: 3,
+    advices: [
+      '今日は、考えることから少し離れて、頭に余白をつくる日。答えを探すより、ぼんやりする時間を持つほど、思考は自然と澄んでいきます。',
+      'たくさん考えた頭は、もう十分がんばっています。今日は、決めること・調べることをいったん手放して、何もしない余白を自分に許してあげてください。',
+      '情報でいっぱいの頭には、空白がいちばんの栄養です。今日は予定をつめこまず、ぽっかりした時間をひとつ残しておくと、心まで軽くなっていきます。',
+    ],
+    reason: '考えすぎ・情報過多・決断疲れで、頭がオーバーワークになっている状態です。答えを出そうとするほど疲れやすく、今は「もっと考える」より「余白をつくる」ことが必要です。',
+    future: '今日は、考えることをすこしお休みしても大丈夫。頭をゆるめたぶんだけ、明日の発想は澄んでいきます。',
+    affirmations: [
+      '私は、心をゆるめて、答えとつながっています。',
+      '私は、静かな余白の中で、必要な答えを受け取っています。',
+      '私は、今ここに戻るほど、未来への道が自然に見えています。',
+    ],
+    messages: [
+      '過去や未来ではなく、今に戻ろう✨',
+      '大切な直感は、時間と余白がないとやってこない✨',
+      'しっかり寝る。ひたすらぼーっとしよう✨',
+      'そんなに自分を律して頑張らなくて大丈夫✨',
+      '人生は習慣でしか変わらない✨\n結局、毎日どう生きるか。',
+    ],
+  },
+  [T.BODY]: {
+    id: T.BODY,
+    name: 'カラダ疲労タイプ',
+    symbol: '☾',
+    tagline: 'カラダが、休息をやさしく求めている日',
+    accent: '#B79A86',
+    priority: 1,
+    advices: [
+      '今日は、がんばることより、カラダを休ませることを最優先にする日。横になる・あたためる・早めに眠る——回復にあてた時間は、ちゃんと未来につながります。',
+      '重く感じるカラダは、これまで動いてくれた証です。今日は無理に動かさず、ゆっくり休ませてあげてください。休むことも、立派な前進です。',
+      'カラダが「少し休ませて」とサインを出しています。今日は予定をしぼって、こまめに座る・深く眠る時間をつくると、巡りも気持ちも戻ってきます。',
+    ],
+    reason: '睡眠不足・移動・家事・仕事などで、カラダの回復が追いついていない状態です。やる気がないのではなく、カラダが「少し休ませて」とサインを出しています。今日は気合いより回復を優先する日です。',
+    future: 'カラダの重さは、がんばってきた証。今日を労わる一日にすると、未来のあなたはふっと軽くなります。',
+    affirmations: [
+      '私は、休みながら、ちゃんと前へ進んでいます。',
+      '私は、カラダを大切にするほど、本来の巡りが戻っています。',
+      '私は、休むほど整い、私らしい未来へ進んでいます。',
+    ],
+    messages: [
+      'エネルギー温存のため、思い切って休んでみて✨',
+      'しっかり寝る。ひたすらぼーっとしよう✨',
+      'そんなに自分を律して頑張らなくて大丈夫✨',
+      'まずは自分がやりたいことをする時間を確保✨',
+      '理想を叶えるために、努力しなきゃと思う必要なし✨',
+    ],
+  },
+  [T.NERVE]: {
+    id: T.NERVE,
+    name: '神経緊張タイプ',
+    symbol: '꙳',
+    tagline: '神経が、すこし張りつめている日',
+    accent: '#A99CC4',
+    priority: 4,
+    advices: [
+      '今日は、気を張った神経を、そっと緩めてあげる日。肩や顔の力を抜いて、ゆっくり長く息を吐くほど、心も穏やかにほどけていきます。',
+      '緊張がつづいたカラダは、ずっとあなたを守ろうとしてくれていました。今日は安心できる場所で、あたたかい飲みものとともに、ゆるむ時間をとってみてください。',
+      '急いで解決しようとせず、まず「もう大丈夫」とカラダに伝える日。緩めるほど神経は落ち着き、見える景色までやわらかくなっていきます。',
+    ],
+    reason: '不安・焦り・気遣い・罪悪感などで、神経が緊張モードになっている状態です。問題をすぐ解決しようとするより、まず安心を戻すことが大切です。カラダをゆるめると、心も落ち着きやすくなります。',
+    future: '気を張ってきたぶん、今日はゆるめる番。呼吸をひとつ深くするだけで、未来は穏やかにほどけていきます。',
+    affirmations: [
+      '私は、ゆるんでいても、ちゃんと守られています。',
+      '私は、安心の中でゆるみ、本来の力を取り戻しています。',
+      '私は、穏やかなカラダで、望む世界を選んでいます。',
+    ],
+    messages: [
+      '世界はあなたの味方✨',
+      '今の感情に気づけただけで十分✨',
+      'そんなに自分を律して頑張らなくて大丈夫✨',
+      '過去や未来ではなく、今に戻ろう✨',
+      '理想を叶えるために、努力しなきゃと思う必要なし✨',
+    ],
+  },
+  [T.EMOTION]: {
+    id: T.EMOTION,
+    name: '感情整理タイプ',
+    symbol: '❀',
+    tagline: 'こころが、整理したい想いを抱えている日',
+    accent: '#C58FA0',
+    priority: 5,
+    advices: [
+      '今日は、わいてくる気持ちを、否定せずそのまま感じてあげる日。「そう感じているんだね」と認めるだけで、心は静かに整っていきます。',
+      '感情は、ふたをするより、感じきるほうが早く流れていきます。今日は前向きになろうとせず、自分の本音にやさしく耳をかたむけてみてください。',
+      '揺れている心は、丁寧に生きている証です。今日は、悲しさもイライラもまるごと抱きしめて、自分にだけは味方でいてあげてください。',
+    ],
+    reason: '悲しさ・落ち込み・イライラ・罪悪感など、感情が内側に溜まっている状態です。無理に前向きになる必要はありません。まずは「そう感じているんだな」と気づくことが、未来へ進む一歩です。',
+    future: 'わいてくる感情は、あなたが丁寧に生きている証。今日は感じきってあげると、未来はもっと軽やかに進みます。',
+    affirmations: [
+      '私は、どんな気持ちの私も、大切にしています。',
+      '私は、感情の奥にある本音とやさしくつながっています。',
+      '私は、自分の気持ちを愛しながら、未来を選んでいます。',
+    ],
+    messages: [
+      '今の感情に気づけただけで十分✨',
+      'やめても大丈夫✨',
+      'いきなりやめなくても、10％からやめてみよう✨',
+      '人に何を言われても、自分だけは自分を許してあげて✨',
+      '世の中の正解が、あなたの正解とは限らない✨',
+      '自分の感情は、少しずつでも表現してみて✨',
+    ],
+  },
+  [T.CHARGE]: {
+    id: T.CHARGE,
+    name: 'エネルギー充電タイプ',
+    symbol: '☼',
+    tagline: 'エネルギーを、静かに満たしたい日',
+    accent: '#D2B377',
+    priority: 2,
+    advices: [
+      '今日は、動き出すより、満ちるのを待つ日。心地よいと感じることをひとつ大切にすると、エネルギーは自然に戻ってきます。',
+      'まだ走り出さなくて大丈夫。今日は、好きな香り・あたたかい光・静かな音楽——自分を満たしてくれるものに、そっと触れて過ごしてみてください。',
+      'エネルギーは、無理に絞り出すより、満たすほどわいてきます。今日は「やらなきゃ」を脇に置いて、心地よさを補給する一日にしてみましょう。',
+    ],
+    reason: '疲れ切っているわけではないけれど、まだ動き出すほどのエネルギーが満ちていない状態です。今日は大きく進むより、整える・ぼーっとする・心地よいものに触れることで、自然に力が戻ってきます。',
+    future: '今は充電の時間。無理に動かず満たしていくほど、未来のあなたは大きく羽ばたけます。',
+    affirmations: [
+      '私は、満ちて、内側から輝いています。',
+      '私は、内側から整い、必要なものを自然に受け取っています。',
+      '私は、満ちた私から、愛と豊かさを巡らせています。',
+    ],
+    messages: [
+      '人生を豊かにするのは、心に残るような経験✨',
+      'まずは自分がやりたいことをする時間を確保✨',
+      'やって幸せなことしかやらないと決めよう✨',
+      '大切な直感は、時間と余白がないとやってこない✨',
+      'しっかり寝る。ひたすらぼーっとしよう✨',
+    ],
+  },
+  [T.RECOVER]: {
+    id: T.RECOVER,
+    name: '回復完了タイプ',
+    symbol: '✦',
+    tagline: '心とカラダが、軽やかに整っている日',
+    accent: '#9CB99E',
+    priority: 6,
+    advices: [
+      '今日は、整ったこの軽やかさを味わう日。気になっていた小さなことに、ふっと手をつけてみると、流れが心地よく動きはじめます。',
+      '心もカラダも、いいバランスにいます。今日はこの調子を活かして、後回しにしていたことへ、軽い気持ちで一歩進んでみてください。',
+      '満ちて整った今は、選ぶ力がいちばん働くとき。今日は、本当にやりたいことを基準に、心が動くほうをそっと選んでいきましょう。',
+    ],
+    reason: 'カラダも気持ちも比較的整っていて、軽さや安心感がある状態です。無理に頑張る必要はありませんが、今の軽さを活かして、小さな行動を起こすと未来につながりやすい日です。',
+    future: '整ったあなたのまま、今日を味わって。この余白が、最高の未来への滑走路になります。',
+    affirmations: [
+      '私は、整っています。今の私で、選んでいます。',
+      '私は、整ったカラダで、本来の私に戻っています。',
+      '私は、満ちた状態から、次のステージへ進んでいます。',
+    ],
+    messages: [
+      '願ったら全部叶う✨\n願わなかったら叶わない✨',
+      '人生を豊かにするのは、心に残るような経験✨',
+      'やって幸せなことしかやらないと決めよう✨',
+      'まずは自分がやりたいことをする時間を確保✨',
+      '世界はあなたの味方✨',
+    ],
+  },
+  [T.CHALLENGE]: {
+    id: T.CHALLENGE,
+    name: 'チャレンジ日和タイプ',
+    symbol: '✧',
+    tagline: '一歩、踏み出すのにぴったりな日',
+    accent: '#D9A14E',
+    priority: 7,
+    advices: [
+      '今日は、追い風が吹いている日。完璧を待たず、やってみたいことへ小さな一歩を出すと、うれしい流れが生まれていきます。',
+      'ワクワクは、進んでいいというサインです。今日は、ためらっていたことに「えいっ」と手をのばしてみてください。動くほど道はひらけます。',
+      '今日のあなたは、軽やかに動ける状態にいます。気になっていた連絡、はじめたかったこと——小さく始めるのに、これ以上ない一日です。',
+    ],
+    reason: 'ワクワク・やってみたい・前向きな感覚が出ている状態です。完璧に準備ができていなくても、今日は一歩動いてみることで流れが生まれやすい日です。小さな挑戦を選んでみましょう。',
+    future: '今日のあなたには、未来を動かす追い風が吹いています。やさしい一歩が、最高の明日をつくります。',
+    affirmations: [
+      '私は、私のペースで、未来を選んでいます。',
+      '私は、楽しさと好奇心を味方に、軽やかに進んでいます。',
+      '私は、今日の一歩から、理想の世界を創っています。',
+    ],
+    messages: [
+      '願ったら全部叶う✨\n願わなかったら叶わない✨',
+      '人生は習慣でしか変わらない✨\n結局、毎日どう生きるか。',
+      'やって幸せなことしかやらないと決めよう✨',
+      '人生を豊かにするのは、心に残るような経験✨',
+      '理想を叶えるために、努力しなきゃと思う必要なし✨',
+    ],
+  },
+};
+
+/*
+ * 生まれ持ったあなたのリズム（数秘・ライフパス）
+ * 生年月日"だけ"から、生まれ持った性質を1つ導く（固定）。
+ * 占いの楽しさに「カラダと心」の世界観をまとわせた、Be Grace だけの占い。
+ * 各タイプ：生まれ持った性質 → カラダの癖 → 整えると伸びる強み。
+ * 数の還元（デジタルルート 1〜9）で性質を選ぶ。
+ */
+const RHYTHMS = [
+  {
+    n: 1,
+    name: 'はじまりの人',
+    symbol: '❍',
+    reading:
+      'あなたは生まれつき、新しい流れを生み出す人。前へ進む力が強いぶん、カラダは“がんばりすぎ”の緊張を肩や頭に抱えやすいタイプ。ゆるめる時間をとるほど、あなたの推進力は冴えていきます。',
+  },
+  {
+    n: 2,
+    name: 'つながりの人',
+    symbol: '❀',
+    reading:
+      'あなたは生まれつき、人の気持ちを受けとる繊細なアンテナの持ち主。やさしさで周りを包むぶん、感情をそっとカラダに抱えやすいタイプ。自分を満たす余白が、あなたの優しさをもっと深くします。',
+  },
+  {
+    n: 3,
+    name: 'ひらく人',
+    symbol: '✿',
+    reading:
+      'あなたは生まれつき、心の輝きを表現する人。喜びを生み出す才能があるぶん、気分の波がカラダの調子に出やすいタイプ。心が弾む時間をつくるほど、あなたの魅力は広がっていきます。',
+  },
+  {
+    n: 4,
+    name: 'ととのえる人',
+    symbol: '◇',
+    reading:
+      'あなたは生まれつき、コツコツと土台を築ける誠実な人。きちんと向き合うぶん、肩や腰に責任の重さを抱えやすいタイプ。カラダを丁寧に整えるほど、あなたの安定感は揺るぎなくなります。',
+  },
+  {
+    n: 5,
+    name: '風の人',
+    symbol: '❖',
+    reading:
+      'あなたは生まれつき、自由と変化を楽しむ人。好奇心で軽やかに動くぶん、神経が高ぶってカラダが休みを忘れやすいタイプ。深い呼吸でゆるめるほど、あなたの感性は澄んでいきます。',
+  },
+  {
+    n: 6,
+    name: 'いつくしむ人',
+    symbol: '♡',
+    reading:
+      'あなたは生まれつき、人を慈しみ調和を生む人。まわりを大切にするぶん、自分を後回しにして疲れを抱えやすいタイプ。自分にやさしくする時間が、あなたの愛をもっと豊かにします。',
+  },
+  {
+    n: 7,
+    name: 'しずけさの人',
+    symbol: '❋',
+    reading:
+      'あなたは生まれつき、物事の奥を見つめる深い感性の持ち主。内側で見つめるぶん、頭と神経に静かな緊張を抱えやすいタイプ。ひとりで整う時間が、あなたの直感を冴えさせます。',
+  },
+  {
+    n: 8,
+    name: 'ゆたかさの人',
+    symbol: '✦',
+    reading:
+      'あなたは生まれつき、現実を動かし豊かさを実現する力の人。前へ進む推進力が強いぶん、カラダに力みを抱えやすいタイプ。ゆるめて受け取る余白が、あなたの豊かさを大きくします。',
+  },
+  {
+    n: 9,
+    name: 'てばなす人',
+    symbol: '✶',
+    reading:
+      'あなたは生まれつき、すべてを包み込む大きな愛の人。人を癒すぶん、まわりの重さまでカラダに抱えやすいタイプ。手放してゆるめるほど、あなたは軽やかに満たされていきます。',
+  },
+];
+
+/*
+ * Be Grace メッセージ
+ * 診断タイプの messages 束から、毎回ランダムで1つ返す（来るたび違う言葉に出会える）。
+ */
+function beGraceMessage(type) {
+  const list = (type && type.messages) || [];
+  if (!list.length) return '';
+  return list[Math.floor(Math.random() * list.length)];
+}
+
+function digitsSum(s) {
+  return String(s)
+    .replace(/\D/g, '')
+    .split('')
+    .reduce((a, c) => a + Number(c), 0);
+}
+
+function digitalRoot(n) {
+  while (n > 9) n = digitsSum(n);
+  return n;
+}
+
+/*
+ * birthdate: 'YYYY-MM-DD' 等（記号は無視して数字だけ使う）
+ * 生年月日"だけ"から「生まれ持ったリズム」を返す（固定）。未入力なら null。
+ */
+function bornRhythm(birthdate) {
+  if (!birthdate) return null;
+  const root = digitalRoot(digitsSum(birthdate)) || 9;
+  return RHYTHMS[root - 1];
+}
+
+/*
+ * 診断ロジック
+ * selectedIds: 選ばれた FEELINGS の id（3つ想定）
+ * 戻り値: { type, mood, scores }
+ *   type : 3つのタグで一番多い7タイプ（同点はやさしい優先順）
+ *   mood : 'beautiful'（進みやすい日）/ 'suffering'（整えながら進む日）
+ *          ＝3つのうち多い方。同数や suffering 多数なら suffering（"整える"を大切にする）
+ */
+function diagnose(selectedIds) {
+  const picks = selectedIds.map((id) => FEELINGS.find((x) => x.id === id)).filter(Boolean);
+
+  // まず判定（mood）：beautiful（進む）と suffering（整える）の多い方
+  let beautiful = 0;
+  let suffering = 0;
+  picks.forEach((f) => (f.mood === 'beautiful' ? (beautiful += 1) : (suffering += 1)));
+  const mood = beautiful > suffering ? 'beautiful' : 'suffering';
+
+  // タイプは「判定(mood)に合う選択肢」の中だけで多数決する。
+  // → 「疲れてる・モヤモヤ（整える）なのにチャレンジ日和（進む）」のような
+  //    判定とタイプの食い違いを防ぐ。同数はやさしい優先順（priority 昇順）。
+  const pool = picks.filter((f) => f.mood === mood);
+  const scores = {};
+  Object.keys(TYPES).forEach((k) => (scores[k] = 0));
+  pool.forEach((f) => (scores[f.type] += 1));
+
+  let best = null;
+  Object.values(TYPES).forEach((type) => {
+    const s = scores[type.id];
+    if (
+      best === null ||
+      s > scores[best.id] ||
+      (s === scores[best.id] && type.priority < best.priority)
+    ) {
+      best = type;
+    }
+  });
+
+  return { type: best, mood, scores };
+}
+
+/*
+ * Be Grace ─ 今日の私診断（無料の玄関）
+ * 画面遷移と診断の実行
+ */
+
+(function () {
+  'use strict';
+
+  /* リンクは config.js で管理（書き換える場所はそこ1か所だけ） */
+  const CFG = (typeof CONFIG !== 'undefined' && CONFIG) || {};
+
+  /* ---------- アクセス3段階（モード） ----------
+   * ①1回(oneshot) / ②14日(trial14) / ③無期限(member)
+   * URLの ?plan= で切替。日数・回数は localStorage が覚える（ソフトな鍵）。
+   */
+  function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+  const MODES = {
+    oneshot: {
+      limit: 'days', max: 1, // 1日（その日は何度でも・翌日からロック）
+      inviteLead:
+        '今のあなたに合う整え方を、一緒に見つけませんか？🤍<br />この診断を引き続き使える、特別なご案内があります。',
+      ctaLabel: 'ご案内を見る',
+      ctaUrl: CFG.CONSULT_URL || '#',
+      lockLead:
+        '無料でのお試しは、ここまで🤍<br />今のあなたに合う整え方を、一緒に見つけませんか？<br />この診断を引き続き使える、特別なご案内があります。',
+    },
+    trial30: {
+      limit: 'days', max: 30, // フロントエンド（ミニ講座）用・30日
+      summary: true, // 30日の最後に「あなたの30日まとめ」を出す（売り込みCTAなし）
+    },
+    member: { limit: 'none' },
+  };
+
+  function getMode() {
+    // 通常は自分のURLの ?plan= を見る。固定ページに埋め込まれた場合は
+    // 親ページ（begracenao.com/shindan/?plan=14 等）の ?plan= を読む。
+    let search = location.search;
+    try {
+      if (window.parent && window.parent !== window && window.parent.location) {
+        search = window.parent.location.search || search;
+      }
+    } catch (e) {
+      /* 別ドメイン埋め込み時はアクセスできないので自分のを使う */
+    }
+    const p = new URLSearchParams(search).get('plan');
+    if (p === '30' || p === '14' || p === 'trial' || p === '14day') return 'trial30';
+    if (p === 'member' || p === 'unlimited') return 'member';
+    return 'oneshot';
+  }
+  const mode = getMode();
+  const cfg = MODES[mode];
+  const lsKey = (s) => `bg_${mode}_${s}`;
+
+  function isLocked() {
+    if (cfg.limit === 'count') {
+      return Number(lsGet(lsKey('count')) || 0) >= cfg.max;
+    }
+    if (cfg.limit === 'days') {
+      const start = Number(lsGet(lsKey('start')) || 0);
+      if (!start) return false;
+      return Math.floor((Date.now() - start) / 86400000) >= cfg.max;
+    }
+    return false; // member は無期限
+  }
+
+  function recordUse() {
+    if (cfg.limit === 'count') {
+      lsSet(lsKey('count'), String(Number(lsGet(lsKey('count')) || 0) + 1));
+    } else if (cfg.limit === 'days') {
+      if (!lsGet(lsKey('start'))) lsSet(lsKey('start'), String(Date.now()));
+    }
+  }
+
+  /* ---------- 30日の記録（その人のスマホに、1日1件） ---------- */
+  function todayStr() {
+    const d = new Date();
+    const pad = (n) => String(n).padStart(2, '0');
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  }
+  function logResult(type, mood) {
+    try {
+      const log = JSON.parse(lsGet('bg_log') || '{}');
+      log[todayStr()] = { type: type.id, mood: mood }; // 同じ日は上書き＝1日1件
+      lsSet('bg_log', JSON.stringify(log));
+    } catch (e) {}
+  }
+  // 「あなたの30日まとめ」を組み立てる（開始日以降の記録だけ集計）
+  function buildSummaryHtml() {
+    let log = {};
+    try { log = JSON.parse(lsGet('bg_log') || '{}'); } catch (e) {}
+    let startStr = '';
+    const startMs = Number(lsGet(lsKey('start')) || 0);
+    if (startMs) {
+      const s = new Date(startMs);
+      const pad = (n) => String(n).padStart(2, '0');
+      startStr = `${s.getFullYear()}-${pad(s.getMonth() + 1)}-${pad(s.getDate())}`;
+    }
+    const entries = Object.keys(log)
+      .filter((d) => !startStr || d >= startStr)
+      .map((d) => log[d]);
+    if (!entries.length) return '30日間、ほんとうにおつかれさまでした🤍';
+    const cnt = {};
+    let suf = 0;
+    let bea = 0;
+    entries.forEach((e) => {
+      cnt[e.type] = (cnt[e.type] || 0) + 1;
+      if (e.mood === 'beautiful') bea += 1;
+      else suf += 1;
+    });
+    let topId = null;
+    let topN = 0;
+    Object.keys(cnt).forEach((id) => {
+      if (cnt[id] > topN) { topN = cnt[id]; topId = id; }
+    });
+    const topName = (typeof TYPES !== 'undefined' && TYPES[topId] && TYPES[topId].name) || '';
+    let closing;
+    if (suf > bea) closing = '立ち止まって、自分を整えることを大切にできた1ヶ月でした。その積み重ねが、これからのあなたを支えていきます🤍';
+    else if (bea > suf) closing = '軽やかに、前へ進めた1ヶ月でした。この流れを、これからも大切にしてくださいね🤍';
+    else closing = '整える日も、進む日も、どちらも大切にできた1ヶ月でした🤍';
+    return (
+      '<span style="font-family:\'Cormorant Garamond\',serif;letter-spacing:.22em;font-size:12px;text-transform:uppercase;color:var(--gold-deep);display:block;margin-bottom:18px">Your 30 Days</span>' +
+      'この1ヶ月、いちばん多かったのは<br>「<strong>' + topName + '</strong>」でした。<br><br>' +
+      '整えながら進む日 <strong>' + suf + '日</strong>　／　進みやすい日 <strong>' + bea + '日</strong><br><br>' +
+      closing
+    );
+  }
+
+  function showLocked() {
+    const cta = document.getElementById('lockedCta');
+    if (cfg.summary) {
+      // 30日モード：最後に「あなたの30日まとめ」を出す（売り込みなし）
+      document.getElementById('lockedLead').innerHTML = buildSummaryHtml();
+      cta.style.display = 'none';
+      show('locked');
+      return;
+    }
+    document.getElementById('lockedLead').innerHTML = cfg.lockLead || '';
+    if (cfg.ctaLabel) {
+      cta.textContent = cfg.ctaLabel;
+      cta.href = cfg.ctaUrl;
+      cta.style.display = '';
+    } else {
+      cta.style.display = 'none';
+    }
+    show('locked');
+  }
+
+  /* ---------- 状態 ---------- */
+  const state = {
+    birthdate: '',
+    feelings: [], // 選ばれた feeling id（最大3）
+    step: 0,
+  };
+
+  /* ---------- DOM ---------- */
+  const screens = {};
+  document.querySelectorAll('.screen').forEach((el) => {
+    screens[el.dataset.screen] = el;
+  });
+  const stepEls = Array.from(document.querySelectorAll('.step'));
+  const dots = Array.from(document.querySelectorAll('.dot'));
+  const feelingsWrap = document.getElementById('feelings');
+  const selectCount = document.getElementById('selectCount');
+
+  /* ---------- 画面切替 ---------- */
+  function show(name) {
+    Object.values(screens).forEach((s) => s.classList.remove('is-active'));
+    screens[name].classList.add('is-active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function showStep(i) {
+    state.step = i;
+    stepEls.forEach((el) => el.classList.toggle('is-active', Number(el.dataset.step) === i));
+    dots.forEach((d) => d.classList.toggle('is-on', Number(d.dataset.step) <= i));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* ---------- 体調チップ生成 ---------- */
+  function buildFeelings() {
+    feelingsWrap.innerHTML = '';
+    FEELINGS.forEach((f) => {
+      const b = document.createElement('button');
+      b.className = 'chip';
+      b.type = 'button';
+      b.textContent = f.label;
+      b.dataset.id = f.id;
+      b.dataset.tone = f.mood === 'beautiful' ? 'shine' : 'rest';
+      b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', () => toggleFeeling(f.id, b));
+      feelingsWrap.appendChild(b);
+    });
+  }
+
+  function toggleFeeling(id, btn) {
+    const i = state.feelings.indexOf(id);
+    if (i >= 0) {
+      state.feelings.splice(i, 1);
+      btn.classList.remove('is-on');
+      btn.setAttribute('aria-pressed', 'false');
+    } else {
+      if (state.feelings.length >= 3) return;
+      state.feelings.push(id);
+      btn.classList.add('is-on');
+      btn.setAttribute('aria-pressed', 'true');
+    }
+    updateFeelingUI();
+  }
+
+  function updateFeelingUI() {
+    const n = state.feelings.length;
+    selectCount.textContent = `${n} / 3`;
+    const full = n >= 3;
+    feelingsWrap.querySelectorAll('.chip').forEach((c) => {
+      const on = c.classList.contains('is-on');
+      c.classList.toggle('is-disabled', full && !on);
+    });
+    const submit = document.querySelector('.step[data-step="1"] .btn');
+    submit.disabled = n !== 3;
+  }
+
+  /* ---------- 生年月日（年・月・日のプルダウン。任意） ---------- */
+  const birthY = document.getElementById('birthYear');
+  const birthM = document.getElementById('birthMonth');
+  const birthD = document.getElementById('birthDay');
+  const birthPreview = document.getElementById('birthPreview');
+
+  /* プルダウンの選択肢を用意（先頭は「年/月/日」の見出し） */
+  (function buildBirthSelects() {
+    const opt = (val, label) => `<option value="${val}">${label}</option>`;
+    const thisYear = new Date().getFullYear();
+    let y = opt('', '年');
+    for (let v = thisYear; v >= 1940; v--) y += opt(v, `${v}年`);
+    let m = opt('', '月');
+    for (let v = 1; v <= 12; v++) m += opt(v, `${v}月`);
+    let d = opt('', '日');
+    for (let v = 1; v <= 31; v++) d += opt(v, `${v}日`);
+    birthY.innerHTML = y;
+    birthM.innerHTML = m;
+    birthD.innerHTML = d;
+  })();
+
+  /* 3つ揃ったら 'YYYY-MM-DD'、揃わなければ '' を返す */
+  function currentBirthdate() {
+    const y = birthY.value, m = birthM.value, d = birthD.value;
+    if (!y || !m || !d) return '';
+    const pad = (n) => String(n).padStart(2, '0');
+    return `${y}-${pad(m)}-${pad(d)}`;
+  }
+
+  function updateBirthPreview() {
+    const v = currentBirthdate();
+    const r = v ? bornRhythm(v) : null;
+    if (!r) {
+      birthPreview.hidden = true;
+      return;
+    }
+    birthPreview.querySelector('.rhythm-name').innerHTML = `${r.symbol}&ensp;${r.name}`;
+    birthPreview.querySelector('.rhythm-reading').textContent = r.reading;
+    birthPreview.hidden = false;
+  }
+  [birthY, birthM, birthD].forEach((el) => el.addEventListener('change', updateBirthPreview));
+
+  /* ---------- 進む / 戻る ---------- */
+  function next(from) {
+    if (from === 0) {
+      // 生年月日は任意。3つ揃えた人だけ「生まれ持ったあなたのリズム」が届く
+      state.birthdate = currentBirthdate();
+      showStep(1);
+    } else if (from === 1) {
+      if (state.feelings.length !== 3) return;
+      runDiagnosis();
+    }
+  }
+
+  function back() {
+    if (state.step === 0) {
+      show('welcome');
+    } else {
+      showStep(state.step - 1);
+    }
+  }
+
+  /* ---------- 診断実行 ---------- */
+  function runDiagnosis() {
+    show('loading');
+    setTimeout(() => {
+      const { type, mood } = diagnose(state.feelings);
+      recordUse(); // 1日/30日モードの鍵（開始日・回数を記録）
+      logResult(type, mood); // 30日まとめ用に、その日の結果を記録
+      renderResult(type, mood);
+      show('result');
+    }, 1700);
+  }
+
+  /* 誕生日が近いとき（前後7日以内）のやさしい一言 */
+  function birthdayNote() {
+    if (!state.birthdate) return '';
+    const [, m, d] = state.birthdate.split('-').map(Number);
+    const today = new Date();
+    const thisYear = new Date(today.getFullYear(), m - 1, d);
+    const diff = Math.round((thisYear - new Date(today.getFullYear(), today.getMonth(), today.getDate())) / 86400000);
+    if (Math.abs(diff) <= 7) {
+      return 'お誕生日のころですね。あなたが生まれてくれて、ありがとう。';
+    }
+    return '';
+  }
+
+  /* 選んだ言葉を「・」でつなぐ */
+  function selectedLabels() {
+    return state.feelings
+      .map((id) => (FEELINGS.find((f) => f.id === id) || {}).label)
+      .filter(Boolean)
+      .join('・');
+  }
+
+  /* 改行を「、。！？の後ろ」だけに限定して、1文字ぼっち改行を防ぐ。
+     CSSの word-break:keep-all と組で使う。
+     句読点が1つも無い長文は、真ん中に改行候補を入れて"半分ずつ"に割る。 */
+  /* 短い・中央ぞろえの言葉用：句読点(、。！？)の後ろに改行候補(<wbr>)を入れ、
+     区切りの無い長い区間は真ん中で割る。CSSの word-break:keep-all と組で、
+     1文字ぼっち改行を防ぎ、行を"半分ずつ"気持ちよく折り返す。
+     （読み応えの本文には使わない＝そちらは自然な禁則処理に任せる） */
+  function phr(s) {
+    s = String(s);
+    let result = '';
+    let run = '';
+    const flush = () => {
+      const chars = [...run];
+      if (chars.length > 13) {
+        const mid = Math.ceil(chars.length / 2);
+        result += chars.slice(0, mid).join('') + '<wbr>' + chars.slice(mid).join('');
+      } else {
+        result += run;
+      }
+      run = '';
+    };
+    for (const ch of s) {
+      if (ch === '、' || ch === '。' || ch === '！' || ch === '？') {
+        flush();
+        result += ch + '<wbr>';
+      } else if (ch === '\n') {
+        flush();
+        result += '\n';
+      } else {
+        run += ch;
+      }
+    }
+    flush();
+    return result;
+  }
+
+  function renderResult(type, mood) {
+    const root = document.getElementById('resultInner');
+    document.documentElement.style.setProperty('--type-accent', type.accent);
+
+    const bday = birthdayNote();
+    // 気づき＆アドバイスは"読み応えの本文"なので、自然な改行（禁則処理）に任せる（phrを通さない）
+    const awareness = `あなたが選んだ「${selectedLabels()}」から、今日は『${type.name}』とお見受けしました。`;
+    const verdictLabel = mood === 'beautiful' ? '今日は進みやすい日' : '今日は整えながら進む日';
+    const advList = type.advices || [];
+    const advice = advList.length ? advList[Math.floor(Math.random() * advList.length)] : '';
+
+    const rhythm = bornRhythm(state.birthdate);
+    const message = phr(beGraceMessage(type)).replace(/\n/g, '<br>');
+    // アファメーションは3つの中から毎回ランダムで1つ
+    const affList = type.affirmations || [];
+    const affirmation = affList.length
+      ? phr(affList[Math.floor(Math.random() * affList.length)])
+      : '';
+
+    // 締めの誘い：モードで出し分け（無期限は売り込みなし）
+    const doorLine = `<p class="door-line">${phr('毎日の小さな選択が、未来を作る。今日のあなたが、どんな状態でも大丈夫。')}</p>`;
+    const doorInvite =
+      mode === 'member' || mode === 'trial30'
+        ? '<p class="door-invite">また明日も、整えにきてくださいね🤍</p>'
+        : `<p class="door-invite">${phr(cfg.inviteLead)}</p>
+           <a class="btn btn--soft door-cta" href="${cfg.ctaUrl}" target="_blank" rel="noopener">${cfg.ctaLabel}</a>`;
+    const doorHtml = `<div class="result-door"><div class="door-mark">❀</div>${doorLine}${doorInvite}</div>`;
+
+    // もう一度：どのモードでも、その日のうちは何度でも診断できる（間違えても安心）
+    const restartHtml =
+      '<div class="result-actions"><button class="btn btn--ghost" data-action="restart">もう一度、診断する</button></div>';
+
+    root.innerHTML = `
+      <p class="result-eyebrow">Today&rsquo;s Diagnosis</p>
+      ${bday ? `<p class="result-personal">${bday}</p>` : ''}
+
+      <div class="result-card" style="--type-accent:${type.accent}">
+        <div class="result-symbol">${type.symbol}</div>
+        <h2 class="result-type">${type.name}</h2>
+        <p class="result-tagline">${phr(type.tagline)}</p>
+      </div>
+
+      ${
+        rhythm
+          ? `<div class="result-rhythm" style="animation-delay:.08s">
+        <span class="rhythm-label">Your Nature ─ 生まれ持ったあなたのリズム</span>
+        <p class="rhythm-name">${rhythm.symbol}&ensp;${rhythm.name}</p>
+        <p class="rhythm-reading">${rhythm.reading}</p>
+      </div>`
+          : ''
+      }
+
+      <div class="result-block result-block--today" style="animation-delay:.15s">
+        <span class="block-label">Today</span>
+        <p class="verdict">${verdictLabel}</p>
+        <p class="block-body">${awareness}</p>
+        <p class="block-body">${advice}</p>
+      </div>
+
+      <div class="result-block result-block--affirm" style="animation-delay:.45s">
+        <span class="block-label">Affirmation</span>
+        <p class="affirm-quote">${affirmation}</p>
+      </div>
+
+      <div class="result-closing result-message" style="animation-delay:.6s">
+        <span class="message-label">Be Grace Message</span>
+        <div class="closing-mark">⟡</div>
+        <p class="message-body">${message}</p>
+      </div>
+
+      ${doorHtml}
+
+      ${restartHtml}
+
+      <p class="disclaimer">
+        ※ これは医療的な診断ではなく、今日の自分にやさしく気づくためのセルフケアの診断です。
+      </p>
+    `;
+  }
+
+  function restart() {
+    state.birthdate = '';
+    state.feelings = [];
+    birthY.value = '';
+    birthM.value = '';
+    birthD.value = '';
+    birthPreview.hidden = true;
+    document.querySelectorAll('#feelings .chip').forEach((x) => {
+      x.classList.remove('is-on', 'is-disabled');
+      x.setAttribute('aria-pressed', 'false');
+    });
+    updateFeelingUI();
+    showStep(0);
+    show('welcome');
+  }
+
+  /* ---------- イベント委譲 ---------- */
+  document.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-action]');
+    if (!t) return;
+    const action = t.dataset.action;
+    if (action === 'start') {
+      showStep(0);
+      show('quiz');
+    } else if (action === 'next') {
+      next(Number(t.dataset.from));
+    } else if (action === 'back') {
+      back();
+    } else if (action === 'restart') {
+      restart();
+    }
+  });
+
+  /* ---------- 初期化 ---------- */
+  buildFeelings();
+  updateFeelingUI();
+  if (isLocked()) showLocked(); // 1回／14日を使い切っていたら、入口の代わりに案内画面
+})();
+
+    </script>
+  </body>
+</html>

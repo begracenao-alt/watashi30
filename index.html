@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#c4b4e7" />
+    <title>Be Grace ─ 今日の私診断（30日）</title>
+
+    <!-- ホーム画面用アイコン設定（manifestのstart_url上書きを避け、追加時のURL=モードを保持） -->
+    <link rel="icon" href="icon-192.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="私診断" />
+    <meta
+      name="description"
+      content="今日一日を最高の未来に繋げる。Be Grace の無料の玄関、今日の私診断。"
+    />
+
+    <!-- 共有時（LINE / Instagram など）のプレビュー表示 -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="今日の私診断 ─ Be Grace" />
+    <meta
+      property="og:description"
+      content="今日一日を、最高の未来に繋げる。1分でできる、今日のあなたの状態診断。"
+    />
+    <meta property="og:locale" content="ja_JP" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- ▼公開後、画像URL（絶対パス）を入れると、共有時に画像が出ます
+         <meta property="og:image" content="https://あなたのURL/ogp.png" /> -->
+
+    <!-- タブ・ブックマークのアイコン（ゴールドのリング） -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Ccircle%20cx='16'%20cy='16'%20r='9'%20fill='none'%20stroke='%23bd9c5e'%20stroke-width='2'/%3E%3C/svg%3E"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="stage" id="stage">
+      <!-- ▼ 玄関（ウェルカム） -->
+      <section class="screen screen--welcome is-active" data-screen="welcome">
+        <div class="welcome-inner">
+          <p class="eyebrow">Be Grace</p>
+          <h1 class="hero-title">今日一日を、<br />最高の未来に繋げる</h1>
+          <p class="hero-sub">今日の私診断</p>
+          <div class="hero-ornament" aria-hidden="true">⟡</div>
+          <p class="hero-lead">
+            ちゃんとしなくて大丈夫。<br />
+            今日も、余白を作りましょう。
+          </p>
+          <button class="btn btn--primary" data-action="start">診断をはじめる</button>
+          <p class="hero-note">所要 約1分 ・ 無料</p>
+        </div>
+      </section>
+
+      <!-- ▼ 質問ステップ -->
+      <section class="screen screen--quiz" data-screen="quiz">
+        <header class="quiz-head">
+          <button class="back" data-action="back" aria-label="ひとつ前へ">‹</button>
+          <div class="progress" aria-hidden="true">
+            <span class="dot" data-step="0"></span>
+            <span class="dot" data-step="1"></span>
+          </div>
+          <span class="quiz-head__spacer"></span>
+        </header>
+
+        <!-- Step 1: 生年月日 -->
+        <div class="step is-active" data-step="0">
+          <p class="step-no">01</p>
+          <h2 class="step-title">生まれた日を、教えてください<span class="optional-tag">任意</span></h2>
+          <p class="step-hint">
+            生まれた日を選ぶと「生まれ持ったあなたのリズム（あなたの本質）」も届きます。<br />
+            入れずに進んでも、診断はできます。
+          </p>
+          <div class="field-birth">
+            <select class="field-select" id="birthYear" aria-label="生まれた年"></select>
+            <select class="field-select" id="birthMonth" aria-label="生まれた月"></select>
+            <select class="field-select" id="birthDay" aria-label="生まれた日"></select>
+          </div>
+          <div class="birth-preview" id="birthPreview" hidden>
+            <span class="rhythm-label">Your Nature ─ 生まれ持ったあなたのリズム</span>
+            <p class="rhythm-name"></p>
+            <p class="rhythm-reading"></p>
+            <p class="birth-preview__caption">↑ これが、あなたの生まれ持った性質です。</p>
+          </div>
+          <button class="btn btn--primary" data-action="next" data-from="0">つぎへ</button>
+        </div>
+
+        <!-- Step 2: 気持ち・体調 3つ -->
+        <div class="step" data-step="1">
+          <p class="step-no">02</p>
+          <h2 class="step-title">いまの気持ち・体調は？</h2>
+          <p class="step-hint">近いものを <b>3つ</b> 選んでください。</p>
+          <div
+            class="choices choices--feelings"
+            id="feelings"
+            role="group"
+            aria-label="気持ち・体調を3つ選ぶ"
+          ><!-- JSで生成 --></div>
+          <p class="select-count" id="selectCount">0 / 3</p>
+          <button class="btn btn--primary" data-action="next" data-from="1" disabled>
+            診断する
+          </button>
+        </div>
+      </section>
+
+      <!-- ▼ 診断中 -->
+      <section class="screen screen--loading" data-screen="loading">
+        <div class="loader" aria-hidden="true"><span></span><span></span><span></span></div>
+        <p class="loading-text">今日のあなたを、感じています…</p>
+      </section>
+
+      <!-- ▼ 使い切ったとき（1回／14日モード）の案内 -->
+      <section class="screen screen--welcome" data-screen="locked">
+        <div class="welcome-inner">
+          <p class="eyebrow">Be Grace</p>
+          <div class="hero-ornament" aria-hidden="true">⟡</div>
+          <p class="hero-lead" id="lockedLead"></p>
+          <a class="btn btn--primary" id="lockedCta" href="#" target="_blank" rel="noopener"></a>
+        </div>
+      </section>
+
+      <!-- ▼ 結果 -->
+      <section class="screen screen--result" data-screen="result">
+        <div class="result-inner" id="resultInner"><!-- JSで生成 --></div>
+      </section>
+    </main>
+
+    <script src="config.js"></script>
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
