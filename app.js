@@ -81,15 +81,15 @@
   }
   function logResult(type, mood) {
     try {
-      const log = JSON.parse(lsGet('bg_log') || '{}');
+      const log = JSON.parse(lsGet('bg_log_30') || '{}');
       log[todayStr()] = { type: type.id, mood: mood }; // 同じ日は上書き＝1日1件
-      lsSet('bg_log', JSON.stringify(log));
+      lsSet('bg_log_30', JSON.stringify(log));
     } catch (e) {}
   }
   // 「あなたの30日まとめ」を組み立てる（開始日以降の記録だけ集計）
   function buildSummaryHtml() {
     let log = {};
-    try { log = JSON.parse(lsGet('bg_log') || '{}'); } catch (e) {}
+    try { log = JSON.parse(lsGet('bg_log_30') || '{}'); } catch (e) {}
     let startStr = '';
     const startMs = Number(lsGet(lsKey('start')) || 0);
     if (startMs) {
