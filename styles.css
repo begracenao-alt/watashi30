@@ -1,0 +1,867 @@
+/* ============================================================
+   Be Grace ─ 今日の私診断
+   リュクス・女性向け・余白を大切にしたトーン
+   ============================================================ */
+
+:root {
+  --cream: #fdf8f7;
+  --cream-deep: #fbf3f1;
+  --ivory: #ffffff;
+  --ink: #4a3d42;
+  --ink-soft: #7a6a70;
+  --gold: #c9a85f;
+  --gold-deep: #b88a32;
+  --gold-light: #f4e3b6;
+  --rose: #e6a6b4;
+  --rose-soft: #f6d2da;
+  --rosegold: #e3b79e;
+  --line: #f0dcd4;
+  --radius: 26px;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --shadow: 0 30px 60px -24px rgba(205, 165, 170, 0.30);
+  --shadow-card: 0 26px 54px -24px rgba(205, 165, 170, 0.32), 0 4px 14px -8px rgba(205, 165, 170, 0.18);
+  --shadow-soft: 0 16px 38px -22px rgba(205, 165, 170, 0.26);
+  --shadow-btn: 0 16px 30px -10px rgba(220, 160, 170, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(150% 65% at 50% -14%, #ffffff 0%, var(--cream) 52%, var(--cream-deep) 100%) fixed;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.85;
+  letter-spacing: 0.02em;
+  font-weight: 300;
+}
+
+/* ごく薄い紙の質感（リュクスなマット感） */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='100'%20height='100'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.85'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+}
+
+.stage {
+  max-width: 468px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  padding: 0 24px env(safe-area-inset-bottom);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- 画面の切り替え ---------- */
+.screen {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  animation: fade 0.7s var(--ease);
+}
+.screen.is-active {
+  display: flex;
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- 共通パーツ ---------- */
+.eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  font-size: 13px;
+  color: var(--gold-deep);
+  text-indent: 0.42em;
+}
+
+.btn {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  border: none;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 17px 34px;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none; /* <a>のボタンでも下線を出さず、余白を正しく効かせる */
+  transition:
+    transform 0.4s var(--ease),
+    box-shadow 0.4s var(--ease),
+    opacity 0.3s;
+}
+.btn--primary {
+  background: linear-gradient(135deg, #e6a6b4 0%, #e3b79e 52%, #c9a85f 100%);
+  color: #ffffff;
+  box-shadow: var(--shadow-btn), inset 0 1px 0 rgba(255, 255, 255, 0.38);
+  text-shadow: 0 1px 1px rgba(120, 90, 40, 0.16);
+}
+.btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 22px 36px -10px rgba(168, 134, 63, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.42);
+}
+.btn--primary:active {
+  transform: translateY(0);
+}
+.btn--primary:disabled {
+  opacity: 0.35;
+  cursor: default;
+  box-shadow: none;
+  transform: none;
+}
+.btn--ghost {
+  background: transparent;
+  color: var(--gold-deep);
+  border: 1px solid var(--line);
+}
+/* やわらかいお誘い用（売り込み感を出さない） */
+.btn--soft {
+  background: linear-gradient(180deg, #fffefb, #f6ecda);
+  color: var(--gold-deep);
+  border: 1px solid var(--gold);
+  box-shadow: 0 8px 20px -12px rgba(168, 134, 63, 0.32);
+}
+.btn--soft:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(180deg, #fffefb, #f1e4cb);
+  box-shadow: 0 14px 26px -12px rgba(168, 134, 63, 0.4);
+}
+
+/* ============================================================
+   玄関（ウェルカム）
+   ============================================================ */
+.screen--welcome {
+  justify-content: center;
+  text-align: center;
+}
+.welcome-inner {
+  padding: 40px 6px 70px;
+  position: relative;
+}
+/* 玄関の、やわらかな光 */
+.welcome-inner::before {
+  content: '';
+  position: absolute;
+  top: 4%;
+  left: 50%;
+  width: 340px;
+  height: 340px;
+  max-width: 92vw;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(226, 207, 159, 0.4), transparent 66%);
+  z-index: -1;
+  pointer-events: none;
+}
+.hero-title {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 500;
+  font-size: clamp(27px, 8.2vw, 35px);
+  letter-spacing: 0.08em;
+  margin: 18px 0 14px;
+  line-height: 1.6;
+}
+.hero-sub {
+  display: inline-block;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 400;
+  color: var(--gold-deep);
+  letter-spacing: 0.22em;
+  font-size: 18px;
+  position: relative;
+  padding: 0 26px;
+  margin-top: 4px;
+}
+.hero-sub::before,
+.hero-sub::after {
+  content: '';
+  position: absolute;
+  top: 52%;
+  width: 16px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.75;
+}
+.hero-sub::before {
+  left: 0;
+}
+.hero-sub::after {
+  right: 0;
+}
+.hero-ornament {
+  color: var(--gold);
+  font-size: 22px;
+  margin: 36px 0;
+  letter-spacing: 0.3em;
+}
+.hero-lead {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 2.2;
+  margin-bottom: 46px;
+}
+.hero-note {
+  margin-top: 22px;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: var(--ink-soft);
+}
+
+/* ============================================================
+   クイズ
+   ============================================================ */
+.quiz-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 26px 2px 8px;
+}
+.back {
+  background: none;
+  border: none;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--gold-deep);
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+.back:hover {
+  background: rgba(189, 156, 94, 0.1);
+}
+.quiz-head__spacer {
+  width: 40px;
+}
+.progress {
+  display: flex;
+  gap: 10px;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--line);
+  transition: all 0.5s var(--ease);
+}
+.dot.is-on {
+  background: var(--gold);
+  transform: scale(1.25);
+}
+
+.step {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  padding: 18px 2px 40px;
+  animation: fade 0.6s var(--ease);
+}
+.step.is-active {
+  display: flex;
+}
+.step-no {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+.step-title {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 500;
+  font-size: clamp(16px, 4.8vw, 19px);
+  line-height: 1.6;
+  margin: 8px 0 10px;
+  white-space: nowrap; /* 見出しは1行に収める */
+}
+.step-hint {
+  color: var(--ink-soft);
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+.optional-tag {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--gold-deep);
+  background: rgba(189, 156, 94, 0.12);
+  border-radius: 999px;
+  padding: 3px 12px;
+}
+.step-hint b {
+  color: var(--gold-deep);
+  font-weight: 500;
+}
+
+.field-birth {
+  display: flex;
+  gap: 10px;
+}
+.field-select {
+  flex: 1;
+  min-width: 0;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--ink);
+  background-color: var(--ivory);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 17px 28px 17px 12px;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-align-last: center;
+  appearance: none;
+  -webkit-appearance: none;
+  /* 金色の下向き矢印（押せる印） */
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='12'%20height='8'%20viewBox='0%200%2012%208'%3E%3Cpath%20d='M1%201l5%205%205-5'%20fill='none'%20stroke='%23bd9c5e'%20stroke-width='1.6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 11px center;
+}
+.field-select:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(189, 156, 94, 0.12);
+}
+
+/* 生まれた日を選ぶと現れる、その場プレビュー */
+.birth-preview {
+  margin-top: 22px;
+  margin-bottom: auto;
+  text-align: center;
+  padding: 24px 22px 22px;
+  background: linear-gradient(135deg, #faf4e9, #f5ead6);
+  border-radius: 22px;
+  animation: rise 0.6s var(--ease);
+}
+.birth-preview .rhythm-name {
+  font-size: 21px;
+  margin-top: 8px;
+}
+.birth-preview .rhythm-reading {
+  font-size: 14px;
+}
+.birth-preview__caption {
+  margin-top: 16px;
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+}
+
+/* 選択肢 */
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 11px;
+  margin-bottom: auto;
+}
+.choices--gender {
+  flex-direction: column;
+}
+.chip {
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--ink);
+  background: linear-gradient(180deg, #fffdf9, var(--ivory));
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 13px 20px;
+  cursor: pointer;
+  transition: all 0.35s var(--ease);
+  letter-spacing: 0.05em;
+  box-shadow: 0 2px 6px -3px rgba(150, 122, 80, 0.12);
+}
+.chip--lg {
+  padding: 18px 22px;
+  text-align: left;
+  font-size: 16px;
+}
+.chip:hover {
+  border-color: var(--gold);
+  transform: translateY(-1px);
+}
+.chip.is-on {
+  background: linear-gradient(135deg, #e2c585, var(--gold-deep));
+  color: #fffdf8;
+  border-color: transparent;
+  box-shadow:
+    0 10px 20px -6px rgba(168, 134, 63, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.32);
+}
+/* tone でほのかに色味を分ける */
+.chip[data-tone='shine'].is-on {
+  background: linear-gradient(135deg, #e3c477, #c9a85f);
+}
+.chip.is-disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.select-count {
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  color: var(--gold-deep);
+  letter-spacing: 0.1em;
+  margin: 24px 0 18px;
+}
+
+.step .btn {
+  margin-top: 26px;
+  width: 100%;
+}
+
+/* ============================================================
+   診断中
+   ============================================================ */
+.screen--loading {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.loader {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.loader span {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: breathe 1.4s var(--ease) infinite;
+}
+.loader span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.loader span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(0.6);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.loading-text {
+  font-family: 'Noto Serif JP', serif;
+  color: var(--ink-soft);
+  letter-spacing: 0.14em;
+}
+
+/* ============================================================
+   結果
+   ============================================================ */
+.screen--result {
+  padding-bottom: 50px;
+}
+.result-inner {
+  padding-top: 34px;
+}
+.result-eyebrow {
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: 0.4em;
+  font-size: 12px;
+  color: var(--gold-deep);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.result-personal {
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-bottom: 22px;
+  letter-spacing: 0.06em;
+}
+
+/* 結果ヘッダーカード */
+.result-card {
+  background: linear-gradient(170deg, #fffdf9, var(--ivory));
+  border-radius: var(--radius);
+  padding: 46px 30px 40px;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  position: relative;
+  overflow: hidden;
+}
+.result-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--type-accent, var(--gold)) 22%,
+    var(--type-accent, var(--gold)) 78%,
+    transparent
+  );
+}
+.result-symbol {
+  font-size: 40px;
+  color: var(--type-accent, var(--gold));
+  line-height: 1;
+}
+.result-type {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 600;
+  font-size: clamp(21px, 6.4vw, 29px);
+  letter-spacing: 0.03em;
+  margin: 16px 0 12px;
+  white-space: nowrap; /* 「エネルギー充電タイプ」等の長い名前も1行に収める */
+}
+.result-tagline {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+/* 今日のあなたのリズム（生年月日 × 今日の日付） */
+.result-rhythm {
+  margin-top: 22px;
+  text-align: center;
+  padding: 24px 22px 26px;
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: rise 0.7s var(--ease) forwards;
+}
+.rhythm-label {
+  display: inline-block;
+  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: 0.18em;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: 14px;
+}
+.rhythm-name {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: 0.1em;
+  color: var(--gold-deep);
+  position: relative;
+  display: inline-block;
+  padding: 0 24px;
+}
+.rhythm-name::before,
+.rhythm-name::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 16px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.6;
+}
+.rhythm-name::before {
+  left: -6px;
+}
+.rhythm-name::after {
+  right: -6px;
+}
+.rhythm-reading {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: 14.5px;
+  line-height: 2.05;
+  color: var(--ink);
+  margin-top: 14px;
+  text-align: left;
+}
+
+/* 結果のセクション群 */
+.result-block {
+  margin-top: 26px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 26px 26px 28px;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: rise 0.7s var(--ease) forwards;
+}
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.block-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: 0.16em;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: 14px;
+}
+.block-label::before {
+  content: '';
+  width: 18px;
+  height: 1px;
+  background: var(--gold);
+}
+.block-jp {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 500;
+  font-size: 17px;
+  margin-bottom: 10px;
+  letter-spacing: 0.04em;
+}
+.block-body {
+  font-size: 15px;
+  line-height: 2.1;
+  color: var(--ink);
+}
+
+/* 今日の状態ブロックは、他の結果と同じく中央ぞろえに */
+.result-block--today {
+  text-align: center;
+}
+.result-block--today .block-label {
+  justify-content: center;
+}
+/* 読み応えのある本文（お見受け文・アドバイス）は、読みやすく左ぞろえに */
+.result-block--today .block-body {
+  text-align: left;
+}
+
+/* 今日の判定（進みやすい日 / 整えながら進む日） */
+.verdict {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 500;
+  font-size: clamp(19px, 5.4vw, 22px);
+  color: var(--gold-deep);
+  text-align: center;
+  letter-spacing: 0.04em;
+  line-height: 1.7;
+  margin-bottom: 18px;
+}
+
+/* アファメーション（特別なトーン） */
+.result-block--affirm {
+  background: #ffffff;
+  border-color: var(--line);
+  text-align: center;
+}
+/* アファメーション3つ：1行ずつ、やさしい区切り線で */
+.result-block--affirm .block-jp {
+  margin-bottom: 16px;
+}
+.affirm-line {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: clamp(15px, 4.2vw, 17px);
+  line-height: 2;
+  padding: 12px 4px;
+}
+.affirm-line + .affirm-line {
+  border-top: 1px solid rgba(189, 156, 94, 0.2);
+}
+
+.affirm-quote {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: clamp(15px, 4.4vw, 17px);
+  line-height: 2.1;
+  position: relative;
+  padding: 8px 6px;
+}
+.affirm-quote::before,
+.affirm-quote::after {
+  content: none;
+}
+.affirm-quote::after {
+  content: none;
+}
+
+/* 最後のやさしい一言 */
+.result-closing {
+  text-align: center;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 2.2;
+  color: var(--ink);
+  margin: 40px 14px 8px;
+}
+.closing-mark {
+  color: var(--gold);
+  font-size: 18px;
+  margin-bottom: 14px;
+}
+
+/* Be Grace Message（オーナーからの、毎回ランダムなひとこと） */
+.result-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.message-label {
+  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: 0.3em;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  text-indent: 0.3em;
+  margin-bottom: 16px;
+}
+.message-body {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: clamp(16px, 4.6vw, 18px);
+  line-height: 2.2;
+}
+
+/* 鍵の奥への、ひそやかな誘い（売り込まない） */
+.result-door {
+  margin-top: 44px;
+  text-align: center;
+  padding: 30px 24px;
+  border-top: 1px solid var(--line);
+}
+.door-line {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 2.1;
+  letter-spacing: 0.06em;
+}
+.door-cta {
+  width: 100%;
+  margin-top: 24px;
+}
+.door-sub {
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+}
+.door-invite {
+  margin-top: 18px;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 2;
+  color: var(--ink);
+  letter-spacing: 0.05em;
+}
+.door-key {
+  font-size: 20px;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 12px;
+}
+.door-mark {
+  font-size: 18px;
+  color: var(--gold);
+  margin-bottom: 14px;
+  letter-spacing: 0.2em;
+}
+
+.result-actions {
+  margin-top: 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.result-actions .btn {
+  width: 100%;
+}
+
+/* やさしい免責 */
+.disclaimer {
+  margin-top: 26px;
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.9;
+  color: var(--ink-soft);
+  opacity: 0.85;
+  letter-spacing: 0.04em;
+}
+
+/* 「う」だけ・「夫」だけ…と最後の1文字が次の行に落ちる"ぼっち改行"を防ぐ。
+   句読点（、。）の所だけで改行し、語の途中では折り返さない（JSが、。の後ろに改行候補を入れる）。
+   長すぎて1行に入らないときだけ、やむを得ず途中で折り返す（overflow-wrap）。 */
+/* 短い・中央ぞろえの言葉：句読点や中央で"半分ずつ"気持ちよく折り返す（phrの<wbr>＋keep-all） */
+.result-tagline,
+.affirm-quote,
+.affirm-line,
+.message-body,
+.door-line,
+.door-invite {
+  word-break: keep-all;
+}
+/* 読み応えのある本文・見出し・説明文：日本語の自然な改行（禁則処理）に任せる。「。」「、」は行頭に来ない */
+.block-body,
+.rhythm-reading,
+.step-title,
+.step-hint,
+.hero-lead {
+  line-break: strict;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+/* 見出しは行の長さをそろえる */
+.hero-title,
+.hero-lead,
+.step-title {
+  text-wrap: balance;
+}
+
+@media (max-width: 360px) {
+  .stage {
+    padding: 0 16px;
+  }
+}
