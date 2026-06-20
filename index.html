@@ -1019,8 +1019,8 @@ document.addEventListener("touchstart", function () {}, { passive: true });
  *
  *  ボタンの飛び先は、あなたのサイト（WordPress）の固定ページに向けてあります。
  *  ↓ この2ページを WordPress で作れば、ボタンが自動でそこに繋がります。
- *    ・begracenao.com/guide/   … 個別相談・セミナーのご案内（①の飛び先）
- *    ・begracenao.com/member/  … 会員のご案内（②の飛び先）
+ *    ・begracenao.com/guide/    … 個別相談・セミナーのご案内（①の飛び先・この30日版では未使用）
+ *    ・begracenao.com/todayme30/ … 私診断30日の出口ページ（②の飛び先）
  *
  *  ★ ここがポイント ★
  *  この2ページの"中身"は、いつでも WordPress の管理画面で編集できます。
@@ -1032,8 +1032,8 @@ const CONFIG = {
   // ① 1日モードの後 →「ご案内を見る」の飛び先（個別相談・セミナーのご案内ページ）
   CONSULT_URL: 'https://begracenao.com/guide/',
 
-  // ② 14日モードの後 →「次のご案内を見る」の飛び先（会員のご案内ページ）
-  MEMBER_URL: 'https://begracenao-alt.github.io/link/',
+  // ② 30日モードの最後 →「次のご案内を見る」の飛び先（私診断30日の出口ページ /todayme30/）
+  MEMBER_URL: 'https://begracenao.com/todayme30/',
 
   // （予備）LINE公式の友だち追加リンク。今のファネルではアプリ内で未使用
   LINE_URL: 'https://begracenao.com/guide/',
